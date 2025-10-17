@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+$usuario = $clave = "";
+$chkRecordar = false;
+
+?>
+
 <html lang="en">
 <head>
     <title>Tienda</title>
@@ -8,9 +13,10 @@
     <form action="panelprincipal.php" method="POST">
         <fieldset>
             Usuario <br> 
-            <input type="text" name="nombre" value=""/><br>
+            <input type="text" name="usuario" value=""/><br>
             Clave:<br>
             <input type="password" name="clave" value=""/><br><br>
+            <input type="checkbox" name="chkRecordar"/>Recordarme<br><br>
             <input type="submit" value="Ingresar"/>
         </fieldset>
     </form>
