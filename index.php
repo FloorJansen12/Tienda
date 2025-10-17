@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Ejemplo Sesiones</title>
+    <title>Tienda</title>
 </head>
 <body>
     <h1>Login</h1>
