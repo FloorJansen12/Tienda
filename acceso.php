@@ -21,9 +21,9 @@ if($chkRecordar){
 
 if($usuario=="test" && $clave=="test123"){
     //Creo las sesiones
-    $_SESSION["nombre"] = $usuario;
+    $_SESSION["usuario"] = $usuario;
     $_SESSION["clave"] = $clave;
-    header("Location:panelprincipal.php");
+    header("Location:carrodecompra.php");
 } else {
     header("Location:index.php");
 }

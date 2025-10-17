@@ -1,5 +1,9 @@
 <?php
+session_start();
 require_once __DIR__ . '/conexionBD.php';
+if(!isset($_SESSION['usuario']) || !isset($_SESSION['clave'])) {
+    header("Location:index.php");
+}
 
 $conexion = new ConexionBD();
 $productosEs = $conexion->obtenerTodosEs();
@@ -38,3 +42,16 @@ echo "Precio: " . $CamisetaEn['price'] . "<br><br>";
 
 
 ?>
+
+<html>
+<head>
+    <title>Carro de Compra</title>  
+</head>
+<body>
+    <h1>Carro de Compra</h1>
+    <h1>Bienvenido usuario: <?php echo $_SESSION['usuario']; ?></h1>
+    <hr>
+    <a href="cerrarsesion.php">Cerrar Sesion</a>
+    <br>
+</body>
+</html>
