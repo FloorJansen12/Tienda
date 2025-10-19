@@ -5,7 +5,7 @@ class ConexionBD {
     private $user = 'root';
     private $password = '';
     private $database = 'tienda';
-    private $port = 3307;
+    private $port = 3306;
     private $conexion = null;
 
     public function __construct() {
