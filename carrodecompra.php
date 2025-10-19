@@ -71,7 +71,7 @@ $t = $textos[$idioma];
 </head>
 <body>
     <h1>Carro de Compra</h1>
-    <h1>Bienvenido usuario: <?php echo $_SESSION['usuario']; ?></h1>
+    <h3>Usuario: <?php echo $_SESSION['usuario']; ?></h3>
     <p><a href="panelprincipal.php?idioma=<?php echo $idioma; ?>">Volver</a></p>
 
     <?php if(!empty($elementosCarrito)): ?>
