@@ -65,8 +65,6 @@ $productos = ($idioma == "en") ? $conexion->obtenerTodosEn() : $conexion->obtene
                 border-radius: 10px;
                 padding: 15px;
                 text-align: center;
-            }
-            .producto a {
                 text-decoration: none;
                 color: #ffffffff;
                 font-weight: 700;
@@ -100,9 +98,8 @@ $productos = ($idioma == "en") ? $conexion->obtenerTodosEn() : $conexion->obtene
             $key = ($idioma == "en") ? 'name' : 'nombre';
             foreach($productos as $producto):
             ?>
-            <div class="producto">
-                <a href="producto.php?id=<?php echo $producto['id'] ?>"><?php echo $producto[$key] ?></a>
-            </div>
+            <a href="producto.php?id=<?php echo $producto['id'] ?>" class="producto"><?php echo $producto[$key] ?></a>
         <?php endforeach; ?>
+        </div>
     </body>
 </html>
