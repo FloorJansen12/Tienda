@@ -23,7 +23,7 @@ if($usuario=="test" && $clave=="test123"){
     //Creo las sesiones
     $_SESSION["usuario"] = $usuario;
     $_SESSION["clave"] = $clave;
-    header("Location:carrodecompra.php");
+    header("Location:panelprincipal.php");
 } else {
     header("Location:index.php");
 }

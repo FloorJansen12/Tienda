@@ -9,49 +9,151 @@ $conexion = new ConexionBD();
 $productosEs = $conexion->obtenerTodosEs();
 $productosEn = $conexion->obtenerTodosEn();
 
-echo "<h2>Productos en Español:</h2>";
-foreach ($productosEs as $producto) {
-    echo "ID: " . $producto['id'] . "<br>";
-    echo "Nombre: " . $producto['nombre'] . "<br>";
-    echo "Descripción: " . $producto['descripcion']. "<br>";
-    echo "Precio: " . $producto['precio'] . "<br><br>";
+$idioma = "es";
+if (isset($_COOKIE["c_recordar"]) && isset($_COOKIE["Idioma"])) {
+    $idioma = $_COOKIE["Idioma"];
 }
 
+$elementosCarrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
 
-echo "<h2>Productos en Inglés:</h2>";
-foreach ($productosEn as $producto) {
-    echo "ID: " . $producto['id'] . "<br>";
-    echo "Nombre: " . $producto['name'] . "<br>";
-    echo "Descripción: " . $producto['description'] . "<br>";
-    echo "Precio: " . $producto['price'] . "<br><br>";
-}
 
-echo "<h2>Consultar Producto Específico:</h2>";
-$Camiseta = $conexion->obtenerProductoEs(1);
 
-echo "ID: " . $Camiseta['id'] . "<br>";
-echo "Nombre: " . $Camiseta['nombre'] . "<br>"; 
-echo "Descripción: " . $Camiseta['descripcion']. "<br>";
-echo "Precio: " . $Camiseta['precio'] . "<br><br>";
 
-$CamisetaEn = $conexion->obtenerProductoEn(1);
-echo "ID: " . $CamisetaEn['id'] . "<br>";
-echo "Nombre: " . $CamisetaEn['name'] . "<br>";
-echo "Descripción: " . $CamisetaEn['description'] . "<br>";
-echo "Precio: " . $CamisetaEn['price'] . "<br><br>";
+// echo "<h2>Productos en Español:</h2>";
+// foreach ($productosEs as $producto) {
+//     echo "ID: " . $producto['id'] . "<br>";
+//     echo "Nombre: " . $producto['nombre'] . "<br>";
+//     echo "Descripción: " . $producto['descripcion']. "<br>";
+//     echo "Precio: " . $producto['precio'] . "<br><br>";
+// }
 
+
+// echo "<h2>Productos en Inglés:</h2>";
+// foreach ($productosEn as $producto) {
+//     echo "ID: " . $producto['id'] . "<br>";
+//     echo "Nombre: " . $producto['name'] . "<br>";
+//     echo "Descripción: " . $producto['description'] . "<br>";
+//     echo "Precio: " . $producto['price'] . "<br><br>";
+// }
+
+// echo "<h2>Consultar Producto Específico:</h2>";
+// $Camiseta = $conexion->obtenerProductoEs(1);
+
+// echo "ID: " . $Camiseta['id'] . "<br>";
+// echo "Nombre: " . $Camiseta['nombre'] . "<br>"; 
+// echo "Descripción: " . $Camiseta['descripcion']. "<br>";
+// echo "Precio: " . $Camiseta['precio'] . "<br><br>";
+
+// $CamisetaEn = $conexion->obtenerProductoEn(1);
+// echo "ID: " . $CamisetaEn['id'] . "<br>";
+// echo "Nombre: " . $CamisetaEn['name'] . "<br>";
+// echo "Descripción: " . $CamisetaEn['description'] . "<br>";
+// echo "Precio: " . $CamisetaEn['price'] . "<br><br>";
+
+
+$textos = [
+    'es' => [
+        'nombre' => 'Nombre: ',
+        'precio' => 'Precio: ',
+    ],
+    'en' => [
+        'nombre' => 'Name: ',
+        'precio' => 'Price: ',
+    ]
+];
+$t = $textos[$idioma];
 
 ?>
 
 <html>
 <head>
     <title>Carro de Compra</title>  
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #f9fafc;
+            margin: 0;
+        }
+        a {
+            color: blue;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        header {
+            background-color: #3B4465;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h2 {
+            margin-left: 30px;
+        }
+        p {
+            margin-left: 30px;
+            font-weight: 600;
+        }
+        .producto {
+            background-color: #A7E245;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        button {
+            margin-left: 30px;
+            background-color: #A7E245;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Carro de Compra</h1>
-    <h1>Bienvenido usuario: <?php echo $_SESSION['usuario']; ?></h1>
-    <hr>
-    <a href="cerrarsesion.php">Cerrar Sesion</a>
-    <br>
+    <header>
+        <h1>Carro de Compra</h1>
+        <h3>Usuario: <?php echo $_SESSION['usuario']; ?></h3>
+        <nav>
+            <p><a href="panelprincipal.php?idioma=<?php echo $idioma; ?>">Panel Principal</a></p>
+            <p><a href="cerrarsesion.php">Cerrar Sesion</a></p>
+        </nav>
+    </header>
+    <div>
+        <?php if(!empty($elementosCarrito)): ?>
+        <h2>Productos en el carrito:</h2>
+        <?php 
+        $conexion = new ConexionBD();
+        foreach($elementosCarrito as $item): 
+            $producto = ($idioma == "en") 
+                ? $conexion->obtenerProductoEn($item['id']) 
+                : $conexion->obtenerProductoEs($item['id']);
+        ?>
+        <div>
+            <p><strong><?php echo $t['nombre']; ?></strong>
+                <?php echo ($idioma == "en") ? $producto['name'] : $producto['nombre']; ?>
+            </p>
+            <p><strong><?php echo $t['precio']; ?></strong>
+                <?php echo number_format(($idioma == "en") ? $producto['price'] : $producto['precio'], 2); ?>
+            </p>
+
+            <form method="POST" action="borrarProducto.php">
+                <button type="submit" name="id" value="<?php echo $item['id']; ?>">Eliminar</button>
+            </form>
+        </div>
+        <hr>
+        <?php endforeach; ?>
+        
+        <?php else: ?>
+            <p>El carrito está vacío</p>
+        <?php endif; ?>
+    </div>
+
 </body>
 </html>
