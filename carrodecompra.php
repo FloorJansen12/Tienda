@@ -68,13 +68,48 @@ $t = $textos[$idioma];
 <html>
 <head>
     <title>Carro de Compra</title>  
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #f9fafc;
+            margin: 0;
+        }
+        a {
+            color: blue;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        header {
+            background-color: #3B4465;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h2 {
+            margin-left: 30px;
+        }
+        p {
+            margin-left: 30px;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-    <h1>Carro de Compra</h1>
-    <h3>Usuario: <?php echo $_SESSION['usuario']; ?></h3>
-    <p><a href="panelprincipal.php?idioma=<?php echo $idioma; ?>">Volver</a></p>
-
-    <?php if(!empty($elementosCarrito)): ?>
+    <header>
+        <h1>Carro de Compra</h1>
+        <h3>Usuario: <?php echo $_SESSION['usuario']; ?></h3>
+        <nav>
+            <p><a href="panelprincipal.php?idioma=<?php echo $idioma; ?>">Panel Principal</a></p>
+            <p><a href="cerrarsesion.php">Cerrar Sesion</a></p>
+        </nav>
+    </header>
+    <div>
+        <?php if(!empty($elementosCarrito)): ?>
         <h2>Productos en el carrito:</h2>
         <?php 
         $conexion = new ConexionBD();
@@ -90,10 +125,9 @@ $t = $textos[$idioma];
             <hr>
         <?php endforeach; ?>
         
-    <?php else: ?>
-        <p>El carrito está vacío</p>
-    <?php endif; ?>
-    <a href="cerrarsesion.php">Cerrar Sesion</a>
-    <br>
+        <?php else: ?>
+            <p>El carrito está vacío</p>
+        <?php endif; ?>
+    </div>
 </body>
 </html>

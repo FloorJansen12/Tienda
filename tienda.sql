@@ -1,5 +1,8 @@
-CREATE DATABASE tienda;
+DROP DATABASE IF EXISTS tienda;
+CREATE DATABASE IF NOT EXISTS tienda;
 USE tienda;
+
+-- Tablas de productos en español e inglés
 CREATE TABLE productoses (
     id INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
@@ -15,7 +18,7 @@ CREATE TABLE productosen (
     PRIMARY KEY (id)
 );  
 
-
+-- Insertar datos de ejemplo
 INSERT INTO productoses (nombre, descripcion, precio) VALUES
 ('Camiseta', 'Camiseta de algodón 100%', 19.99),
 ('Pantalones', 'Pantalones vaqueros ajustados', 49.99),

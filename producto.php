@@ -76,17 +76,79 @@ $t = $textos[$idioma];
 
 <html>
 <head>
+    <style>
+        body {
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+                background-color: #f9fafc;
+                margin: 0;
+            }
+            a {
+                color: blue;
+            }
+            header nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+            }
+            header {
+                background-color: #3B4465;
+                color: white;
+                padding: 15px 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            h2 {
+                margin-left: 30px;
+            }
+            .producto {
+                background-color: #A7E245;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                padding: 15px;
+                text-align: center;
+            }
+            .producto a {
+                text-decoration: none;
+                color: #000000ff;
+                font-weight: 700;
+            }
+            .productos {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+                padding: 30px;
+            }
+            h2 {
+            margin-left: 30px;
+            }
+            p {
+                margin-left: 30px;
+                font-weight: 600;
+            }
+            button {
+                margin-left: 30px;
+                background-color: #A7E245;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+    </style>
 </head>
 <body>
-    <h1><?php echo $t['titulo']; ?></h1>
-    
-    <h3>Usuario: <?php echo $_SESSION['usuario']; ?></h3>
-    
-    <p><a href="panelprincipal.php?idioma=<?php echo $idioma; ?>">Volver</a></p>
-    <p><a href="carrodecompra.php">Carrito de Compra</a></p>
-    <p><a href="cerrarsesion.php">Cerrar Sesion</a></p>
-
-    <hr>
+    <header>
+        <h1><?php echo $t['titulo']; ?></h1>
+        
+        <h3>Usuario: <?php echo $_SESSION['usuario']; ?></h3>
+        <nav>
+            <p><a href="panelprincipal.php?idioma=<?php echo $idioma; ?>">Panel principal</a></p>
+            <p><a href="carrodecompra.php">Carrito de Compra</a></p>
+            <p><a href="cerrarsesion.php">Cerrar Sesion</a></p>
+        </nav>
+    </header>
     
     <?php if(isset($mensaje)): ?>
         <p><strong><?php echo $mensaje; ?></strong></p>
@@ -113,5 +175,6 @@ $t = $textos[$idioma];
             <?php echo $t['agregar']; ?>
         </button>
     </form>
+
 </body>
 </html>

@@ -34,27 +34,75 @@ $productos = ($idioma == "en") ? $conexion->obtenerTodosEn() : $conexion->obtene
 
 <html>
     <head>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, sans-serif;
+                background-color: #f9fafc;
+                margin: 0;
+            }
+            a {
+                color: blue;
+            }
+            header nav a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+            }
+            header {
+                background-color: #3B4465;
+                color: white;
+                padding: 15px 30px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            h2 {
+                margin-left: 30px;
+            }
+            .producto {
+                background-color: #A7E245;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                padding: 15px;
+                text-align: center;
+            }
+            .producto a {
+                text-decoration: none;
+                color: #ffffffff;
+                font-weight: 700;
+            }
+            .productos {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 20px;
+                padding: 30px;
+            }
+        </style>
     </head>
     <body>
-        <h1>Panel Principal</h1>
-        <h3>Bienvenido Usuario: <?php echo $_SESSION['usuario']; ?></h3>
-        <!-- <h3>Bienvenido Usuario: Carlos></h3> -->
-
-        <a href="panelprincipal.php?idioma=es">ES (Español)</a> /
-        <a href="panelprincipal.php?idioma=en">EN (English)</a>
-        <p><a href="carrodecompra.php">Carrito de Compra</a></p>
-        <p><a href="cerrarsesion.php">Cerrar Sesion</a></p>
-        
-        
-        <hr>
-        <h2><?php echo $titulo[($idioma == "en") ? 1 : 0]; ?></h2>
-        <hr>
-        
-        <?php
-        $key = ($idioma == "en") ? 'name' : 'nombre';
-        foreach($productos as $producto):
-        ?>
-            <a href="producto.php?id=<?php echo $producto['id'] ?>"><?php echo $producto[$key] ?></a> <br>
+        <header>
+            <h1>Panel Principal</h1>
+            <h3>Bienvenido Usuario: <?php echo $_SESSION['usuario']; ?></h3>
+            <!-- <h3>Bienvenido Usuario: Carlos></h3> -->
+            <nav>
+                <a href="panelprincipal.php?idioma=es">ES (Español)</a> /
+                <a href="panelprincipal.php?idioma=en">EN (English)</a>
+                <p><a href="carrodecompra.php">Carrito de Compra</a></p>
+                <p><a href="cerrarsesion.php">Cerrar Sesion</a></p>    
+            </nav>
+        </header>
+        <div>
+            <br>
+            <h2><?php echo $titulo[($idioma == "en") ? 1 : 0]; ?></h2>
+        </div>  
+        <div class="productos">
+            <?php
+            $key = ($idioma == "en") ? 'name' : 'nombre';
+            foreach($productos as $producto):
+            ?>
+            <div class="producto">
+                <a href="producto.php?id=<?php echo $producto['id'] ?>"><?php echo $producto[$key] ?></a>
+            </div>
         <?php endforeach; ?>
     </body>
 </html>
