@@ -97,6 +97,23 @@ $t = $textos[$idioma];
             margin-left: 30px;
             font-weight: 600;
         }
+        .producto {
+            background-color: #A7E245;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        button {
+            margin-left: 30px;
+            background-color: #A7E245;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -118,16 +135,25 @@ $t = $textos[$idioma];
                 ? $conexion->obtenerProductoEn($item['id']) 
                 : $conexion->obtenerProductoEs($item['id']);
         ?>
-        <p><strong><?php echo $t['nombre']; ?>:</strong> 
-            <?php echo ($idioma == "en") ? $producto['name'] : $producto['nombre']; ?>
-        <p><strong><?php echo $t['precio']; ?>:</strong> 
-            <?php echo number_format(($idioma == "en") ? $producto['price'] : $producto['precio'], 2); ?>
-            <hr>
+        <div>
+            <p><strong><?php echo $t['nombre']; ?></strong>
+                <?php echo ($idioma == "en") ? $producto['name'] : $producto['nombre']; ?>
+            </p>
+            <p><strong><?php echo $t['precio']; ?></strong>
+                <?php echo number_format(($idioma == "en") ? $producto['price'] : $producto['precio'], 2); ?>
+            </p>
+
+            <form method="POST" action="borrarProducto.php">
+                <button type="submit" name="id" value="<?php echo $item['id']; ?>">Eliminar</button>
+            </form>
+        </div>
+        <hr>
         <?php endforeach; ?>
         
         <?php else: ?>
             <p>El carrito está vacío</p>
         <?php endif; ?>
     </div>
+
 </body>
 </html>
